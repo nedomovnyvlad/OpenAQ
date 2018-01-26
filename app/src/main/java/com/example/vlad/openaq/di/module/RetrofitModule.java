@@ -12,9 +12,10 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
+import static com.example.vlad.openaq.Constants.Api.BASE_URL;
+
 @Module
 public class RetrofitModule {
-    private static final String BASE_URL = "https://api.openaq.org/";
 
     @Provides
     @NonNull
