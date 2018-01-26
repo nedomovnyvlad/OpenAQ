@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion versions.compileSdk
+
     defaultConfig {
         applicationId "com.example.vlad.openaq"
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,13 +18,46 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.0.2'
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation libraries.supportAppCompat
+    implementation libraries.supportDesign
+    implementation libraries.supportRecyclerView
+
+    implementation libraries.moxy
+    annotationProcessor libraries.moxyCompiler
+
+    implementation libraries.dagger
+    annotationProcessor libraries.daggerCompiler
+
+    implementation libraries.rxJava
+    implementation libraries.rxAndroid
+
+    implementation libraries.okHttp
+
+    implementation libraries.retrofit
+    implementation libraries.retrofitGsonConverter
+    implementation libraries.retrofitRxJavaAdapter
+
+    implementation libraries.gson
+
+    compileOnly libraries.autoValue
+    compileOnly libraries.autoValueGson
+
+    annotationProcessor libraries.autoValue
+    annotationProcessor libraries.autoValueGson
+
+    implementation libraries.butterKnife
+    annotationProcessor libraries.butterKnifeCompiler
+
+    testImplementation libraries.junit
+    androidTestImplementation libraries.testRunner
+    androidTestImplementation libraries.espresso
 }
