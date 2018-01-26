@@ -33,9 +33,14 @@ dependencies {
 
     implementation libraries.moxy
     annotationProcessor libraries.moxyCompiler
+    implementation libraries.moxyAppCompat
 
     implementation libraries.dagger
     annotationProcessor libraries.daggerCompiler
+
+    implementation libraries.daggerAndroid
+    annotationProcessor libraries.daggerAndroidCompiler
+    implementation libraries.daggerAndroidSupport
 
     implementation libraries.rxJava
     implementation libraries.rxAndroid
@@ -43,16 +48,14 @@ dependencies {
     implementation libraries.okHttp
 
     implementation libraries.retrofit
-    implementation libraries.retrofitGsonConverter
+    implementation libraries.retrofitJacksonConverter
     implementation libraries.retrofitRxJavaAdapter
 
-    implementation libraries.gson
-
-    compileOnly libraries.autoValue
-    compileOnly libraries.autoValueGson
-
+    provided libraries.autoValueAnnotations
     annotationProcessor libraries.autoValue
-    annotationProcessor libraries.autoValueGson
+
+    implementation libraries.jackson
+    implementation libraries.jacksonAnnotations
 
     implementation libraries.butterKnife
     annotationProcessor libraries.butterKnifeCompiler
