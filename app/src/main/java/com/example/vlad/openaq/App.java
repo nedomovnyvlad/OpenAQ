@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import timber.log.Timber;
 
 public class App extends Application implements HasActivityInjector {
 
@@ -36,6 +37,8 @@ public class App extends Application implements HasActivityInjector {
                 .build();
 
         appComponent.inject(this);
+
+        Timber.plant(new Timber.DebugTree());
     }
 
     @NonNull
