@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -21,6 +22,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class CityFragment extends BaseFragment implements CityView {
 
@@ -30,6 +32,12 @@ public class CityFragment extends BaseFragment implements CityView {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.layout_network_error)
+    View networkErrorView;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private CityAdapter adapter;
 
@@ -71,8 +79,31 @@ public class CityFragment extends BaseFragment implements CityView {
         recyclerView.setAdapter(adapter);
     }
 
+    @OnClick(R.id.button_repeat_request)
+    public void onRepeatRequestButtonClick() {
+        presenter.requestCityInfoList();
+    }
+
     @Override
     public void showList(List<CityInfo> cityInfoList) {
+        networkErrorView.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+
         adapter.setData(cityInfoList);
+    }
+
+    @Override
+    public void showNetworkError() {
+        networkErrorView.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showLoading() {
+        networkErrorView.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 }

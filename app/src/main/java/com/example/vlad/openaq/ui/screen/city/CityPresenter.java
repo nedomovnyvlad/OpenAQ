@@ -20,6 +20,12 @@ public class CityPresenter extends MvpPresenter<CityView> {
 
     @Override
     protected void onFirstViewAttach() {
+        requestCityInfoList();
+    }
+
+    public void requestCityInfoList() {
+        getViewState().showLoading();
+
         cityModel.getCities()
                 .subscribe(new DisposableSingleObserver<List<CityInfo>>() {
                     @Override
@@ -30,6 +36,7 @@ public class CityPresenter extends MvpPresenter<CityView> {
                     @Override
                     public void onError(Throwable e) {
                         Timber.e(e, "Failed to get cities");
+                        getViewState().showNetworkError();
                     }
                 });
     }

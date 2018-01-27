@@ -2,4 +2,6 @@
     <string name="app_name">OpenAQ</string>
 
     <string name="item_measurements">%d measurements</string>
+    <string name="network_error_message">Something went wrong</string>
+    <string name="try_again">Try again</string>
 </resources>
