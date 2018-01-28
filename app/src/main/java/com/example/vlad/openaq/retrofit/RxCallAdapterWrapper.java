@@ -10,7 +10,6 @@ import java.lang.reflect.Type;
 import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
-import retrofit2.Response;
 
 public class RxCallAdapterWrapper<R> implements CallAdapter<R, Object> {
     private final CallAdapter<R, Object> wrapped;
@@ -30,7 +29,7 @@ public class RxCallAdapterWrapper<R> implements CallAdapter<R, Object> {
     public Object adapt(@NonNull Call<R> call) {
         Object adaptedByWrapped = wrapped.adapt(call);
         if (adaptedByWrapped instanceof Single) {
-            return ((Single<Response<R>>) adaptedByWrapped)
+            return ((Single) adaptedByWrapped)
                     .doOnSubscribe(ignored -> {
                         if (!NetworkUtils.isOnline(context)) {
                             throw new NoConnectivityException();

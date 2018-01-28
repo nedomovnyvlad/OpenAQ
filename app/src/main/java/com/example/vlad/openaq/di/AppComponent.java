@@ -3,11 +3,13 @@ package com.example.vlad.openaq.di;
 import android.app.Application;
 
 import com.example.vlad.openaq.App;
+import com.example.vlad.openaq.api.CityService;
 import com.example.vlad.openaq.di.module.ApplicationModule;
 import com.example.vlad.openaq.di.module.ContextModule;
 import com.example.vlad.openaq.di.module.NetworkModule;
 import com.example.vlad.openaq.di.module.RetrofitModule;
 import com.example.vlad.openaq.network.ChangeableBaseUrl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Singleton;
 
@@ -32,6 +34,10 @@ public interface AppComponent {
     }
 
     ChangeableBaseUrl changeableBaseUrl();
+
+    ObjectMapper objectMapper();
+
+    CityService cityService();
 
     void inject(App app);
 }

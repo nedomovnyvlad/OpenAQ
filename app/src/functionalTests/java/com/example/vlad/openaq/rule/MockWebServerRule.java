@@ -53,9 +53,7 @@ public class MockWebServerRule implements TestRule {
     }
 
     private void changeBaseUrl(@NonNull MockWebServer mockWebServer) {
-        TestUtils.app()
-                .getAppComponent()
-                .changeableBaseUrl()
+        TestUtils.getChangeableBaseUrl()
                 .setHost(mockWebServer.url("").toString());
     }
 

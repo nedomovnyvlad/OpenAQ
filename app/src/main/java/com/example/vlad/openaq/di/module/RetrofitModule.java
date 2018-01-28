@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.example.vlad.openaq.api.CityService;
 import com.example.vlad.openaq.retrofit.RxErrorHandlingCallAdapterFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Singleton;
 
@@ -22,10 +23,10 @@ public class RetrofitModule {
     @Provides
     @NonNull
     @Singleton
-    public Retrofit provideRetrofit(Context context, OkHttpClient okHttpClient) {
+    public Retrofit provideRetrofit(Context context, OkHttpClient okHttpClient, ObjectMapper objectMapper) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create(objectMapper))
                 .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create(context))
                 .client(okHttpClient)
                 .build();

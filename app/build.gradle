@@ -73,6 +73,7 @@ dependencies {
     testImplementation libraries.mockitoCore
     testImplementation libraries.assertJ
     testImplementation libraries.mockWebServer
+    testImplementation libraries.robolectric
 
     androidTestImplementation libraries.testRunner
     androidTestImplementation libraries.espresso
