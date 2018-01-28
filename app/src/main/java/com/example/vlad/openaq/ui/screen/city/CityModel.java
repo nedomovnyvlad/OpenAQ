@@ -4,7 +4,6 @@ import com.example.vlad.openaq.api.CityService;
 import com.example.vlad.openaq.entity.CityInfo;
 import com.example.vlad.openaq.entity.CityResponse;
 
-import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -26,11 +25,7 @@ public class CityModel {
                 .map(CityResponse::results)
                 .flattenAsObservable(cityInfoList -> cityInfoList)
                 .filter(cityInfo -> cityInfo.count() >= MIN_CITY_COUNT)
-                .toSortedList(
-                        Collections.reverseOrder(
-                                (first, second) -> first.count().compareTo(second.count())
-                        )
-                )
+                .toSortedList(new CityInfo.DescByCountComparator())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
