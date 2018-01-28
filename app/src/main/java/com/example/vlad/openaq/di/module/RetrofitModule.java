@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
@@ -21,11 +22,12 @@ public class RetrofitModule {
     @Provides
     @NonNull
     @Singleton
-    public Retrofit provideRetrofit(Context context) {
+    public Retrofit provideRetrofit(Context context, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create(context))
+                .client(okHttpClient)
                 .build();
     }
 

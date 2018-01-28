@@ -5,7 +5,9 @@ import android.app.Application;
 import com.example.vlad.openaq.App;
 import com.example.vlad.openaq.di.module.ApplicationModule;
 import com.example.vlad.openaq.di.module.ContextModule;
+import com.example.vlad.openaq.di.module.NetworkModule;
 import com.example.vlad.openaq.di.module.RetrofitModule;
+import com.example.vlad.openaq.network.ChangeableBaseUrl;
 
 import javax.inject.Singleton;
 
@@ -16,6 +18,7 @@ import dagger.Component;
 @Component(modules = {
         ApplicationModule.class,
         ContextModule.class,
+        NetworkModule.class,
         RetrofitModule.class
 })
 public interface AppComponent {
@@ -27,6 +30,8 @@ public interface AppComponent {
 
         AppComponent build();
     }
+
+    ChangeableBaseUrl changeableBaseUrl();
 
     void inject(App app);
 }

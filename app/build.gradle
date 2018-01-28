@@ -52,6 +52,8 @@ dependencies {
     implementation libraries.rxJava
     implementation libraries.rxAndroid
 
+    implementation libraries.okHttp
+
     implementation libraries.retrofit
     implementation libraries.retrofitJacksonConverter
     implementation libraries.retrofitRxJavaAdapter
@@ -70,7 +72,10 @@ dependencies {
     testImplementation libraries.junit
     testImplementation libraries.mockitoCore
     testImplementation libraries.assertJ
+    testImplementation libraries.mockWebServer
 
     androidTestImplementation libraries.testRunner
     androidTestImplementation libraries.espresso
+    androidTestImplementation libraries.espressoContrib
+    androidTestImplementation libraries.mockWebServer
 }
