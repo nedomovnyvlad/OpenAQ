@@ -1,5 +1,7 @@
 package com.example.vlad.openaq.ui.screen.city;
 
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -105,5 +107,15 @@ public class CityFragment extends BaseFragment implements CityView {
         networkErrorView.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter) {
+        getContext().registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    public void unregisterReceiver(BroadcastReceiver broadcastReceiver) {
+        getContext().unregisterReceiver(broadcastReceiver);
     }
 }

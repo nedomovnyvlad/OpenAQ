@@ -1,6 +1,7 @@
 package com.example.vlad.openaq.ui.screen.city;
 
 import com.example.vlad.openaq.entity.CityInfo;
+import com.example.vlad.openaq.retrofit.NoConnectivityException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import java.util.List;
 import io.reactivex.Single;
 
 import static java.util.Arrays.asList;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -66,6 +68,25 @@ public class CityPresenterTest {
         cityPresenter.requestCityInfoList();
 
         verifyErrorShown();
+    }
+
+    @Test
+    public void requestWithNoConnection_shouldRegisterAndUnregisterReceiver() {
+        List<CityInfo> cityInfoList = asList(
+                CityInfo.create("City1", 10000),
+                CityInfo.create("City2", 20000)
+        );
+        when(cityModel.getCities())
+                .thenReturn(Single.error(new NoConnectivityException()))
+                .thenReturn(Single.just(cityInfoList));
+
+        cityPresenter.requestCityInfoList();
+
+        verify(cityViewState).registerReceiver(any(), any());
+
+        cityPresenter.onConnectionAppear();
+
+        verify(cityViewState).unregisterReceiver(any());
     }
 
     private List<CityInfo> prepareList() {

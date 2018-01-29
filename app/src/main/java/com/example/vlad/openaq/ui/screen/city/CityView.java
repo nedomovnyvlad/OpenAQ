@@ -1,6 +1,10 @@
 package com.example.vlad.openaq.ui.screen.city;
 
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.vlad.openaq.entity.CityInfo;
 import com.example.vlad.openaq.moxy.AddToEndSingleByTagStateStrategy;
@@ -18,4 +22,10 @@ public interface CityView extends MvpView {
 
     @StateStrategyType(value = AddToEndSingleByTagStateStrategy.class, tag = CITY_LIST_TAG)
     void showLoading();
+
+    @StateStrategyType(SkipStrategy.class)
+    void registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter);
+
+    @StateStrategyType(SkipStrategy.class)
+    void unregisterReceiver(BroadcastReceiver broadcastReceiver);
 }
