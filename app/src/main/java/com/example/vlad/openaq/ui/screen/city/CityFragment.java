@@ -19,6 +19,7 @@ import com.example.vlad.openaq.R;
 import com.example.vlad.openaq.entity.CityInfo;
 import com.example.vlad.openaq.ui.fragment.BaseFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -42,6 +43,8 @@ public class CityFragment extends BaseFragment implements CityView {
     ProgressBar progressBar;
 
     private CityAdapter adapter;
+
+    private List<BroadcastReceiver> broadcastReceivers = new ArrayList<>();
 
     public static CityFragment newInstance() {
         return new CityFragment();
@@ -81,6 +84,15 @@ public class CityFragment extends BaseFragment implements CityView {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onPause() {
+        for (BroadcastReceiver broadcastReceiver : broadcastReceivers) {
+            getContext().unregisterReceiver(broadcastReceiver);
+        }
+
+        super.onPause();
+    }
+
     @OnClick(R.id.button_repeat_request)
     public void onRepeatRequestButtonClick() {
         presenter.requestCityInfoList();
@@ -112,10 +124,12 @@ public class CityFragment extends BaseFragment implements CityView {
     @Override
     public void registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter) {
         getContext().registerReceiver(broadcastReceiver, intentFilter);
+        broadcastReceivers.add(broadcastReceiver);
     }
 
     @Override
     public void unregisterReceiver(BroadcastReceiver broadcastReceiver) {
         getContext().unregisterReceiver(broadcastReceiver);
+        broadcastReceivers.remove(broadcastReceiver);
     }
 }
