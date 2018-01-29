@@ -1,9 +1,11 @@
 package com.example.vlad.openaq.di.module;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.example.vlad.openaq.network.ChangeableBaseUrl;
 import com.example.vlad.openaq.network.ChangeableBaseUrlInterceptor;
+import com.example.vlad.openaq.network.NetworkChecker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -44,5 +46,12 @@ public class NetworkModule {
     @Singleton
     public ChangeableBaseUrlInterceptor provideChangeableBaseUrlInterceptor(ChangeableBaseUrl changeableBaseUrl) {
         return new ChangeableBaseUrlInterceptor(changeableBaseUrl);
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public NetworkChecker provideNetworkChecker(Context context) {
+        return new NetworkChecker(context);
     }
 }

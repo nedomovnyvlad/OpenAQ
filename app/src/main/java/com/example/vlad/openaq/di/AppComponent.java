@@ -30,6 +30,8 @@ public interface AppComponent {
         @BindsInstance
         Builder application(Application application);
 
+        Builder networkModule(NetworkModule networkModule);
+
         AppComponent build();
     }
 

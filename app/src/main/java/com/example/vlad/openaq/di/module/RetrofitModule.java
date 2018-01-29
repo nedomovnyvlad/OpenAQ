@@ -1,9 +1,9 @@
 package com.example.vlad.openaq.di.module;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.example.vlad.openaq.api.CityService;
+import com.example.vlad.openaq.network.NetworkChecker;
 import com.example.vlad.openaq.retrofit.RxErrorHandlingCallAdapterFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,11 +23,11 @@ public class RetrofitModule {
     @Provides
     @NonNull
     @Singleton
-    public Retrofit provideRetrofit(Context context, OkHttpClient okHttpClient, ObjectMapper objectMapper) {
+    public Retrofit provideRetrofit(NetworkChecker networkChecker, OkHttpClient okHttpClient, ObjectMapper objectMapper) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(JacksonConverterFactory.create(objectMapper))
-                .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create(context))
+                .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create(networkChecker))
                 .client(okHttpClient)
                 .build();
     }

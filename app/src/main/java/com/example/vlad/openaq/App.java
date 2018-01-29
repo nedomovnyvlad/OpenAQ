@@ -31,14 +31,18 @@ public class App extends Application implements HasActivityInjector {
     public void onCreate() {
         super.onCreate();
 
-        appComponent = DaggerAppComponent
-                .builder()
-                .application(this)
-                .build();
+        appComponent = prepareAppComponent().build();
 
         appComponent.inject(this);
 
         Timber.plant(new Timber.DebugTree());
+    }
+
+    @NonNull
+    protected AppComponent.Builder prepareAppComponent() {
+        return DaggerAppComponent
+                .builder()
+                .application(this);
     }
 
     @NonNull

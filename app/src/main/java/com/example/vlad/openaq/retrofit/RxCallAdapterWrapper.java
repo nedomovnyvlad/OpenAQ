@@ -1,9 +1,8 @@
 package com.example.vlad.openaq.retrofit;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.example.vlad.openaq.util.NetworkUtils;
+import com.example.vlad.openaq.network.NetworkChecker;
 
 import java.lang.reflect.Type;
 
@@ -13,11 +12,11 @@ import retrofit2.CallAdapter;
 
 public class RxCallAdapterWrapper<R> implements CallAdapter<R, Object> {
     private final CallAdapter<R, Object> wrapped;
-    private final Context context;
+    private final NetworkChecker networkChecker;
 
-    public RxCallAdapterWrapper(CallAdapter<R, Object> wrapped, Context context) {
+    public RxCallAdapterWrapper(CallAdapter<R, Object> wrapped, NetworkChecker networkChecker) {
         this.wrapped = wrapped;
-        this.context = context;
+        this.networkChecker = networkChecker;
     }
 
     @Override
@@ -31,7 +30,7 @@ public class RxCallAdapterWrapper<R> implements CallAdapter<R, Object> {
         if (adaptedByWrapped instanceof Single) {
             return ((Single) adaptedByWrapped)
                     .doOnSubscribe(ignored -> {
-                        if (!NetworkUtils.isOnline(context)) {
+                        if (!networkChecker.isOnline()) {
                             throw new NoConnectivityException();
                         }
                     });
