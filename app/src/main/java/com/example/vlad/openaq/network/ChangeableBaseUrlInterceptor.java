@@ -20,8 +20,8 @@ public class ChangeableBaseUrlInterceptor implements Interceptor {
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
 
-        if (changeableBaseUrl.getHost() != null) {
-            HttpUrl newUrl = HttpUrl.parse(changeableBaseUrl.getHost());
+        if (changeableBaseUrl.getUrl() != null) {
+            HttpUrl newUrl = HttpUrl.parse(changeableBaseUrl.getUrl());
 
             if (newUrl != null) {
                 request = request.newBuilder()

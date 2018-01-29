@@ -1,14 +1,14 @@
 package com.example.vlad.openaq.network;
 
 public class ChangeableBaseUrl {
-    private String host;
+    private String url;
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getHost() {
-        return host;
+    public String getUrl() {
+        return url;
     }
 }
 

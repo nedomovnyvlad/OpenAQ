@@ -21,6 +21,7 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
     @CallSuper
     public void onCreate(Bundle savedInstanceState) {
         AndroidSupportInjection.inject(this);
+
         super.onCreate(savedInstanceState);
     }
 
@@ -28,6 +29,7 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
     @CallSuper
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         unbinder = ButterKnife.bind(this, view);
     }
 

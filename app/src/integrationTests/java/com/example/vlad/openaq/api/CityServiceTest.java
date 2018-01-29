@@ -43,7 +43,7 @@ public class CityServiceTest {
 
         getAppComponent()
                 .changeableBaseUrl()
-                .setHost(mockWebServer.url("").toString());
+                .setUrl(mockWebServer.url("").toString());
     }
 
     @After
@@ -67,7 +67,7 @@ public class CityServiceTest {
     }
 
     @Test
-    public void cityService_shouldTakeThrowIfGetsIncorrectResponse() {
+    public void cityService_shouldThrowIfGetsIncorrectResponse() {
         mockWebServer.enqueue(new MockResponse().setResponseCode(404));
 
         try {

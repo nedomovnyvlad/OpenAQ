@@ -1,5 +1,6 @@
 package com.example.vlad.openaq.espresso;
 
+import android.support.annotation.NonNull;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.view.View;
@@ -10,6 +11,7 @@ import static com.example.vlad.openaq.Constants.DO_NOT_CREATE_INSTANCE_OF_THIS_C
 
 public final class ViewActions {
 
+    @NonNull
     public static ViewAction noOp() {
         return new ViewAction() {
             @Override
