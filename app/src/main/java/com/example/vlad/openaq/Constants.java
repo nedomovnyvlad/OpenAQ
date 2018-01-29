@@ -10,6 +10,12 @@ public final class Constants {
         public static final int CITY_LIMIT = 100;
     }
 
+    public static final class HttpClient {
+        public static final int CONNECT_TIMEOUT_MS = 10000;
+        public static final int READ_TIMEOUT_MS = 10000;
+        public static final int WRITE_TIMEOUT_MS = 10000;
+    }
+
     private Constants() {
         throw new IllegalStateException(DO_NOT_CREATE_INSTANCE_OF_THIS_CLASS);
     }

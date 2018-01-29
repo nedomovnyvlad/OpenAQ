@@ -5,11 +5,17 @@ import android.support.annotation.NonNull;
 import com.example.vlad.openaq.network.ChangeableBaseUrl;
 import com.example.vlad.openaq.network.ChangeableBaseUrlInterceptor;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+
+import static com.example.vlad.openaq.Constants.HttpClient.CONNECT_TIMEOUT_MS;
+import static com.example.vlad.openaq.Constants.HttpClient.READ_TIMEOUT_MS;
+import static com.example.vlad.openaq.Constants.HttpClient.WRITE_TIMEOUT_MS;
 
 @Module
 public class NetworkModule {
@@ -19,6 +25,9 @@ public class NetworkModule {
     @Singleton
     public OkHttpClient provideOkHttpClient(ChangeableBaseUrlInterceptor changeableBaseUrlInterceptor) {
         return new OkHttpClient.Builder()
+                .connectTimeout(CONNECT_TIMEOUT_MS, TimeUnit.MILLISECONDS)
+                .writeTimeout(WRITE_TIMEOUT_MS, TimeUnit.MILLISECONDS)
+                .readTimeout(READ_TIMEOUT_MS, TimeUnit.MILLISECONDS)
                 .addInterceptor(changeableBaseUrlInterceptor)
                 .build();
     }
