@@ -44,7 +44,7 @@ public class CityFragment extends BaseFragment implements CityView {
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    private CityAdapter adapter;
+    private CityAdapter adapter = new CityAdapter();
 
     private final List<BroadcastReceiver> broadcastReceivers = new ArrayList<>();
 
@@ -55,13 +55,6 @@ public class CityFragment extends BaseFragment implements CityView {
     @ProvidePresenter
     public CityPresenter providePresenter() {
         return presenter;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        adapter = new CityAdapter(getContext());
     }
 
     @Nullable

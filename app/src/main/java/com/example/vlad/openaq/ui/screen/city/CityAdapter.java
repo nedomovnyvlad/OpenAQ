@@ -1,6 +1,6 @@
 package com.example.vlad.openaq.ui.screen.city;
 
-import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +20,7 @@ import static java.util.Collections.unmodifiableList;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder> {
 
-    private final Context context;
-
     private List<CityInfo> cityInfoList = emptyList();
-
-    public CityAdapter(Context context) {
-        this.context = context;
-    }
 
     @Override
     public CityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,9 +36,8 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
 
         holder.nameTextView.setText(cityInfo.name());
 
-        holder.countTextView.setText(
-                context.getString(R.string.item_measurements, cityInfo.count())
-        );
+        Resources resources = holder.itemView.getResources();
+        holder.countTextView.setText(resources.getString(R.string.item_measurements, cityInfo.count()));
     }
 
     @Override
