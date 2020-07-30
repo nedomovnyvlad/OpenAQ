@@ -6,7 +6,7 @@ ext.versions = [
         targetSdk          : 27,
         compileSdk         : 27,
 
-        androidGradlePlugin: '3.0.1',
+        androidGradlePlugin: '4.0.0',
 
         supportLibs        : '27.0.2',
 
