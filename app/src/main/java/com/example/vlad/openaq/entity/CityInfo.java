@@ -28,6 +28,7 @@ public abstract class CityInfo {
 
     @AutoValue.Builder
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @SuppressWarnings("NullableProblems")
     public static abstract class Builder {
 
         @JsonProperty(JSON_PROPERTY_NAME)

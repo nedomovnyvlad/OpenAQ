@@ -8,7 +8,7 @@ import com.example.vlad.openaq.util.NetworkUtils;
 
 public class ConnectionChangeReceiver extends BroadcastReceiver {
 
-    private ConnectionListener connectionListener;
+    private final ConnectionListener connectionListener;
 
     public ConnectionChangeReceiver(ConnectionListener connectionListener) {
         this.connectionListener = connectionListener;

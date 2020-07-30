@@ -57,7 +57,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
         notifyDataSetChanged();
     }
 
-    class CityViewHolder extends RecyclerView.ViewHolder {
+    static class CityViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.textview_name)
         TextView nameTextView;

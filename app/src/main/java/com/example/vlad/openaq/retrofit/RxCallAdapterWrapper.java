@@ -25,10 +25,11 @@ public class RxCallAdapterWrapper<R> implements CallAdapter<R, Object> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object adapt(@NonNull Call<R> call) {
         Object adaptedByWrapped = wrapped.adapt(call);
         if (adaptedByWrapped instanceof Single) {
-            return ((Single) adaptedByWrapped)
+            return ((Single<R>) adaptedByWrapped)
                     .doOnSubscribe(ignored -> {
                         if (!networkChecker.isNetworkAvailable()) {
                             throw new NoConnectivityException();

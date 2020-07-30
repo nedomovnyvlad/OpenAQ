@@ -58,7 +58,7 @@ dependencies {
     implementation libraries.retrofitJacksonConverter
     implementation libraries.retrofitRxJavaAdapter
 
-    provided libraries.autoValueAnnotations
+    compileOnly libraries.autoValueAnnotations
     annotationProcessor libraries.autoValue
 
     implementation libraries.jackson

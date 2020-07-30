@@ -10,7 +10,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class ChangeableBaseUrlInterceptor implements Interceptor {
-    private ChangeableBaseUrl changeableBaseUrl;
+
+    private final ChangeableBaseUrl changeableBaseUrl;
 
     public ChangeableBaseUrlInterceptor(ChangeableBaseUrl changeableBaseUrl) {
         this.changeableBaseUrl = changeableBaseUrl;

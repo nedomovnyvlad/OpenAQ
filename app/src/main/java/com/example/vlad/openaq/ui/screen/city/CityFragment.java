@@ -27,6 +27,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static java.util.Objects.requireNonNull;
+
 public class CityFragment extends BaseFragment implements CityView {
 
     @Inject
@@ -44,7 +46,7 @@ public class CityFragment extends BaseFragment implements CityView {
 
     private CityAdapter adapter;
 
-    private List<BroadcastReceiver> broadcastReceivers = new ArrayList<>();
+    private final List<BroadcastReceiver> broadcastReceivers = new ArrayList<>();
 
     public static CityFragment newInstance() {
         return new CityFragment();
@@ -76,7 +78,7 @@ public class CityFragment extends BaseFragment implements CityView {
         recyclerView.setLayoutManager(layoutManager);
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(
-                getContext(),
+                requireNonNull(getContext()),
                 layoutManager.getOrientation()
         );
 
@@ -87,7 +89,7 @@ public class CityFragment extends BaseFragment implements CityView {
     @Override
     public void onPause() {
         for (BroadcastReceiver broadcastReceiver : broadcastReceivers) {
-            getContext().unregisterReceiver(broadcastReceiver);
+            requireNonNull(getContext()).unregisterReceiver(broadcastReceiver);
         }
 
         super.onPause();
@@ -123,13 +125,13 @@ public class CityFragment extends BaseFragment implements CityView {
 
     @Override
     public void registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter) {
-        getContext().registerReceiver(broadcastReceiver, intentFilter);
+        requireNonNull(getContext()).registerReceiver(broadcastReceiver, intentFilter);
         broadcastReceivers.add(broadcastReceiver);
     }
 
     @Override
     public void unregisterReceiver(BroadcastReceiver broadcastReceiver) {
-        getContext().unregisterReceiver(broadcastReceiver);
+        requireNonNull(getContext()).unregisterReceiver(broadcastReceiver);
         broadcastReceivers.remove(broadcastReceiver);
     }
 }
