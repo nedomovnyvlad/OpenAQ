@@ -19,7 +19,7 @@ public class TestApp extends App {
                     public NetworkChecker provideNetworkChecker(Context context) {
                         return new NetworkChecker(context) {
                             @Override
-                            public boolean isOnline() {
+                            public boolean isNetworkAvailable() {
                                 // Internet connection is not needed because of web server mock
                                 return true;
                             }

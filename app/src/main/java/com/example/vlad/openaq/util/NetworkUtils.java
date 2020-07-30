@@ -8,12 +8,17 @@ import com.example.vlad.openaq.Constants;
 
 public final class NetworkUtils {
 
-    public static boolean isOnline(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        if (connectivityManager == null) {
+            return false;
+        }
+
         NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+
+        return netInfo != null && netInfo.isConnected();
     }
 
     private NetworkUtils() {

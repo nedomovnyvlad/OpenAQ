@@ -16,7 +16,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (NetworkUtils.isOnline(context)) {
+        if (NetworkUtils.isNetworkAvailable(context)) {
             connectionListener.onConnectionAppear();
         }
     }

@@ -30,7 +30,7 @@ public class RxCallAdapterWrapper<R> implements CallAdapter<R, Object> {
         if (adaptedByWrapped instanceof Single) {
             return ((Single) adaptedByWrapped)
                     .doOnSubscribe(ignored -> {
-                        if (!networkChecker.isOnline()) {
+                        if (!networkChecker.isNetworkAvailable()) {
                             throw new NoConnectivityException();
                         }
                     });

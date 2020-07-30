@@ -12,7 +12,7 @@ public class NetworkChecker {
         this.context = context;
     }
 
-    public boolean isOnline() {
-        return NetworkUtils.isOnline(context);
+    public boolean isNetworkAvailable() {
+        return NetworkUtils.isNetworkAvailable(context);
     }
 }
